@@ -13,3 +13,9 @@ class LibraryManagement():
         self.book = self.cursor.fetchall()
         if len(self.book) == 0:
             raise Exception('book_not_found')
+    
+    def return_book(self,isbn):
+        self.cursor.execute(f'select isbn from book where isbn="{isbn}"')
+        self.book = self.cursor.fetchall()
+        if len(self.book) == 0:
+            raise Exception('book_not_found')

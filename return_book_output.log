@@ -1,15 +1,6 @@
 python return_book_test.py 
-E
-======================================================================
-ERROR: test_return_book_which_is_not_borrowed (__main__.TestMultiplyFunction.test_return_book_which_is_not_borrowed)
+.
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/manav1011/Documents/LIBRARY_MANAGEMENT_SYSTE_INCUBYTE_RECRUITMENT/return_book_test.py", line 7, in setUp
-    self.LMS = LibraryManagement()
-               ^^^^^^^^^^^^^^^^^
-NameError: name 'LibraryManagement' is not defined
+Ran 1 test in 0.001s
 
-----------------------------------------------------------------------
-Ran 1 test in 0.006s
-
-FAILED (errors=1)
+OK
