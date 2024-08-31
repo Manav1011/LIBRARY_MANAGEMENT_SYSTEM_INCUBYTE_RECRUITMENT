@@ -1,0 +1,15 @@
+python add_book_test.py 
+E
+======================================================================
+ERROR: test_add_book_string_ISBN (__main__.TestMultiplyFunction.test_add_book_string_ISBN)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/manav1011/Documents/LIBRARY_MANAGEMENT_SYSTE_INCUBYTE_RECRUITMENT/add_book_test.py", line 7, in setUp
+    self.LMS = LibraryManagement()
+               ^^^^^^^^^^^^^^^^^
+NameError: name 'LibraryManagement' is not defined
+
+----------------------------------------------------------------------
+Ran 1 test in 0.007s
+
+FAILED (errors=1)
