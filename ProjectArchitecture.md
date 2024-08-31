@@ -4,9 +4,9 @@
 
 > Create a simple library management system that allows users to perform basic operations such as adding books, borrowing books, returning books, and viewing available books.
 >
-> Requirements: 
+> Requirements:
 >
->     Add Books, Borrow Books, Return Books, View Available Books:
+> Add Books, Borrow Books, Return Books, View Available Books:
 
 => So for the sake of simplicity i'll create a simple file based database which will store the books and all it's details
 
