@@ -7,10 +7,6 @@ class TestMultiplyFunction(unittest.TestCase):
     def setUp(self):
         self.LMS = LibraryManagement()
 
-    # def test_return_type_is_boolean(self):             
-    #     self.result = self.LMS.borrow_book(1,1)
-    #     self.assertIsInstance(self.result,bool,"The return type of add_book should be a boolean only!!")
-
     def test_check_for_null_values(self):
         # I'm simply raising an assertion error when any of the input parameter is null or not defined
         self.assertRaises(Exception, self.LMS.borrow_book,None,1)
