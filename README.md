@@ -7,7 +7,7 @@
 **For simplicity, I used SQLite3 as a file-based database.**
 
 > ###### ***The log files are : /tests/add_book_ouptut.log  | tests/test_borrow_book.py | tests/borrow_book_output.log | tests/return_book_output.log***
-> > ###### ***Active User Email : manavshah1011.ms@gmail.com***
+> ###### ***Active User Email : manavshah1011.ms@gmail.com***
 
 ## Key Features
 
