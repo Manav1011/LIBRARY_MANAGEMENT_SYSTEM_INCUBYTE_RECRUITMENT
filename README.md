@@ -1,10 +1,12 @@
-## Library Management System
+# Library Management System
 
 **This project is a Library Management System developed as part of the Incubyte Recruitment Process. The system was implemented in Python, adhering to the guidelines provided in the recruitment process document. The project emphasizes Test-Driven Development (TDD), clean coding practices, and proper use of Python-specific features.**
 
-I followed a structured Git workflow, making clear and descriptive commits to specify the changes and updates at each step. Additionally, I logged the output of the tests in dedicated log files, which are updated with each new commit. This demonstrates the iterative process of Test-Driven Development (TDD) and provides a detailed history of the project's evolution.
+**I followed a structured Git workflow, making clear and descriptive commits to specify the changes and updates at each step. Additionally, I logged the output of the tests in dedicated log files, which are updated with each new commit. This demonstrates the iterative process of Test-Driven Development (TDD) and provides a detailed history of the project's evolution.**
 
-> ###### ***The log files are: `/tests/add_book_output.log` | `/tests/borrow_book_output.log` | `/tests/return_book_output.log`***
+**For simplicity, I used SQLite3 as a file-based database.**
+
+> ###### ***The log files are : /tests/add_book_ouptut.log  | tests/test_borrow_book.py | tests/borrow_book_output.log | tests/return_book_output.log***
 
 ## Key Features
 
@@ -24,7 +26,28 @@ The following aspects were emphasized during the development:
 
 ## Installation
 
-## 1. Normal Installationgit clone https://github.com/Manav1011/LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT.git
+## 1. Normal Installationgit clone 
+
+```bash
+cd LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT
+
+pip install -r requirements.txt
+
+# Initialize the sqlite database
+python db_initializer.py
+
+# to run the tests individually
+python -m tests.test_add_book
+python -m tests.test_view_book.py
+python -m tests.test_borrow_book.py
+python -m tests.test_return_book.py
+
+#To run all the tests at once
+python -m unittest discover -s tests
+
+# TO run the user interface
+python main.py
+```
 
 ## 2. Using Docker
 
@@ -35,6 +58,11 @@ cd LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT
 sudo docker build -t lms .
 
 docker run -it lms /bin/bash  
+
+# Initialize the sqlite database
+python db_initializer.py
+
+# to run the tests individually
 
 python -m tests.test_add_book
 python -m tests.test_view_book.py
@@ -74,8 +102,6 @@ python main.py
 ![1725188633712](image/README/1725188633712.png)
 
 ![1725188648778](image/README/1725188648778.png)
-
-![1725189089896](image/README/1725189089896.png)
 
 ## Tech Stack
 
