@@ -4,9 +4,16 @@ import re
 
 class LibraryManagement():
     def __init__(self) -> None:
-        self.conn = sqlite3.connect('book.db')
+        self.conn = sqlite3.connect('book.db')        
         self.cursor = self.conn.cursor()
 
+    def get_user(self,email) -> list:
+        self.cursor.execute('select * from user where email=?',(email,))
+        self.user = self.cursor.fetchall()
+        if len(self.user) > 0:
+            return self.user
+        else:return None
+        
     def add_book(self, isbn: int, title: str, author: str, publication_year: int) -> bool:
         
         # for the test case test_check_for_null_values
@@ -47,8 +54,7 @@ class LibraryManagement():
         except sqlite3.IntegrityError as e:            
             raise Exception('book_already_exists')
         finally:
-            self.conn.commit()
-            self.cursor.close()
+            self.conn.commit()            
     
         return True
 
@@ -95,8 +101,7 @@ class LibraryManagement():
         except sqlite3.IntegrityError as e:
             print(e)
         finally:
-            self.conn.commit()
-            self.cursor.close()
+            self.conn.commit()            
 
         return True
     
@@ -137,6 +142,13 @@ class LibraryManagement():
 
         if len(self.cursor.fetchall()) == 0:
             raise Exception('book_is_not_borrowed')
+
+        try:                        
+            self.cursor.execute('Delete from borrowed where book=?', (isbn,))
+        except sqlite3.IntegrityError as e:
+            print(e)
+        finally:
+            self.conn.commit()            
         
         return True
 
