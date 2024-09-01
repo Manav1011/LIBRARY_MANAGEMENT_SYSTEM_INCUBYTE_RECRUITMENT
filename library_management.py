@@ -73,6 +73,17 @@ class LibraryManagement():
         if len(self.user) == 0:
             raise Exception('borrower_does_not_exists')
         
+        self.cursor.execute(f'''
+        SELECT b.isbn
+        FROM book b
+        JOIN borrowed br ON br.book = b.isbn
+        JOIN user u ON br.user = u.id
+        WHERE u.id = {user_id} and b.isbn= {isbn}
+        ''')
+
+        if len(self.cursor.fetchall()) > 0:
+            raise Exception('book_already_borrowed')
+        
         return True
     
     def return_book(self,isbn):
