@@ -29,6 +29,7 @@ The following aspects were emphasized during the development:
 ## 1. Normal Installationgit clone 
 
 ```bash
+git clone https://github.com/Manav1011/LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT.git
 cd LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT
 
 pip install -r requirements.txt
