@@ -3,12 +3,11 @@ from datetime import datetime
 import re
 
 class LibraryManagement():
-    def __init__(self):
+    def __init__(self) -> None:
         self.conn = sqlite3.connect('book.db')
         self.cursor = self.conn.cursor()
 
-    def add_book(self,isbn,title,author,publication_year):
-        
+    def add_book(self, isbn: int, title: str, author: str, publication_year: int) -> bool:
         # for the test case test_check_for_null_values
         if isbn is None or title is None or author is None or publication_year is None:
             raise Exception('parameters_missing')        
@@ -43,7 +42,7 @@ class LibraryManagement():
             raise Exception('special_characters_are_not_allowed')
         
         try:
-            self.cursor.execute(f'insert into book VALUES({isbn},"{title}","{author}",{publication_year})')
+            self.cursor.execute('insert into book VALUES (?, ?, ?, ?)', (isbn, title, author, publication_year))
         except sqlite3.IntegrityError as e:            
             raise Exception('book_already_exists')
         finally:
@@ -52,7 +51,7 @@ class LibraryManagement():
     
         return True
 
-    def borrow_book(self,isbn,user_id):
+    def borrow_book(self, isbn: int, user_id: int) -> bool:
 
         if isbn is None or user_id is None:
             raise Exception('parameters_missing')        
@@ -63,30 +62,30 @@ class LibraryManagement():
         if not isinstance(user_id, int):
             raise Exception('type_mismatch_for_user_id')        
 
-        self.cursor.execute(f'select isbn from book where isbn="{isbn}"')
+        self.cursor.execute('SELECT isbn FROM book WHERE isbn = ?', (isbn,))
         self.book = self.cursor.fetchall()        
         if len(self.book) == 0:
             raise Exception('book_not_found')
         
-        self.cursor.execute(f'select id from user where id="{user_id}"')
+        self.cursor.execute('SELECT id FROM user WHERE id = ?', (user_id,))
         self.user = self.cursor.fetchall()
         if len(self.user) == 0:
             raise Exception('borrower_does_not_exists')
         
-        self.cursor.execute(f'''
+        self.cursor.execute('''
         SELECT b.isbn
         FROM book b
         JOIN borrowed br ON br.book = b.isbn
         JOIN user u ON br.user = u.id
-        WHERE u.id = {user_id} and b.isbn= {isbn}
-        ''')
+        WHERE u.id = ? AND b.isbn = ?
+        ''',(user_id, isbn))
 
         if len(self.cursor.fetchall()) > 0:
             raise Exception('book_already_borrowed')
         
         return True
     
-    def return_book(self,isbn,user_id):
+    def return_book(self, isbn: int, user_id: int) -> bool:
         if isbn is None or user_id is None:
             raise Exception('parameters_missing')        
 
@@ -95,31 +94,31 @@ class LibraryManagement():
         
         if not isinstance(user_id, int):
             raise Exception('type_mismatch_for_user_id')
-        
-        self.cursor.execute(f'select isbn from book where isbn="{isbn}"')
+
+        self.cursor.execute('SELECT isbn FROM book WHERE isbn = ?', (isbn,))        
         self.book = self.cursor.fetchall()        
         if len(self.book) == 0:
             raise Exception('book_not_found')
         
-        self.cursor.execute(f'select id from user where id="{user_id}"')
+        self.cursor.execute('SELECT id FROM user WHERE id = ?', (user_id,))
         self.user = self.cursor.fetchall()
         if len(self.user) == 0:
             raise Exception('returner_does_not_exists')
 
-        self.cursor.execute(f'''
+        self.cursor.execute('''
         SELECT b.isbn
         FROM book b
         JOIN borrowed br ON br.book = b.isbn
         JOIN user u ON br.user = u.id
-        WHERE u.id = {user_id} and b.isbn= {isbn}
-        ''')
+        WHERE u.id = ? AND b.isbn = ?
+        ''', (user_id, isbn))
 
         if len(self.cursor.fetchall()) == 0:
             raise Exception('book_is_not_borrowed')
         
         return True
 
-    def get_books(self):
+    def get_books(self) -> list:
         self.cursor.execute(f'select * from book')
         self.books = self.cursor.fetchall()        
         return self.books
