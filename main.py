@@ -1,4 +1,4 @@
-from library_management import LibraryManagement
+from LMS.library_management import LibraryManagement
 from rich.console import Console
 from utils import get_email,show_menu,add_book,view_books,borrow_book,return_book
 
