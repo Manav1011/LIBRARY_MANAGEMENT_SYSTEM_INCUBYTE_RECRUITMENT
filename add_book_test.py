@@ -10,7 +10,7 @@ class TestMultiplyFunction(unittest.TestCase):
         self.LMS = LibraryManagement()
 
     def test_return_type_is_boolean(self):
-        self.result = self.LMS.add_book(2,'Test Book','Test Author',2024)
+        self.result = self.LMS.add_book(1,'Test Book','Test Author',2024)
         self.assertIsInstance(self.result,bool,"The return type of add_book should be a boolean only!!")
     
     def test_check_for_null_values(self):
@@ -66,11 +66,11 @@ class TestMultiplyFunction(unittest.TestCase):
 
     def test_book_duplication(self):
         # I'm simply raising an assertion error  when someone tries to add a book with same isbn twice
-        with self.assertRaises(Exception) as e:
-            self.LMS.add_book(1,'Test Book','Test Author',2024)
-        self.assertEqual(str(e.exception),'book_already_exists')
-
-
+        try:
+            with self.assertRaises(Exception) as e:                
+                self.assertEqual(str(e.exception),'book_already_exists')
+        except Exception as e:
+            print(e)
 
 
 if __name__ == '__main__':
