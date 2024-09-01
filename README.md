@@ -1,10 +1,10 @@
-# Library Management System
+## Library Management System
 
 **This project is a Library Management System developed as part of the Incubyte Recruitment Process. The system was implemented in Python, adhering to the guidelines provided in the recruitment process document. The project emphasizes Test-Driven Development (TDD), clean coding practices, and proper use of Python-specific features.**
 
-**I followed a structured Git workflow, making clear and descriptive commits to specify the changes and updates at each step. Additionally, I logged the output of the tests in dedicated log files, which are updated with each new commit. This demonstrates the iterative process of Test-Driven Development (TDD) and provides a detailed history of the project's evolution**
+I followed a structured Git workflow, making clear and descriptive commits to specify the changes and updates at each step. Additionally, I logged the output of the tests in dedicated log files, which are updated with each new commit. This demonstrates the iterative process of Test-Driven Development (TDD) and provides a detailed history of the project's evolution.
 
-> ###### ***The log files are : /tests/add_book_ouptut.log  | tests/test_borrow_book.py | tests/borrow_book_output.log | tests/return_book_output.log***
+> ###### ***The log files are: `/tests/add_book_output.log` | `/tests/borrow_book_output.log` | `/tests/return_book_output.log`***
 
 ## Key Features
 
@@ -24,26 +24,7 @@ The following aspects were emphasized during the development:
 
 ## Installation
 
-## 1. Normal Installation
-
-```bash
-git clone https://github.com/Manav1011/LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT.git
-cd LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT
-
-pip install -r requirements.txt
-
-# to run the tests individually
-python -m tests.test_add_book
-python -m tests.test_view_book.py
-python -m tests.test_borrow_book.py
-python -m tests.test_return_book.py
-
-#To run all the tests at once
-python -m unittest discover -s tests
-
-# TO run the user interface
-python main.py
-```
+## 1. Normal Installationgit clone https://github.com/Manav1011/LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT.git
 
 ## 2. Using Docker
 
@@ -67,12 +48,13 @@ python -m unittest discover -s tests
 python main.py 
 ```
 
-
 ## Here are the screenshots of the running the test cases locally
 
 #### Performing tests one by one
 
-1. **test_add_book**![1725188150669](https://file+.vscode-resource.vscode-cdn.net/home/manav1011/Documents/LIBRARY_MANAGEMENT_SYSTE_INCUBYTE_RECRUITMENT/image/README/1725188150669.png)
+1. **test_add_book**
+
+   ![1725188965182](image/README/1725188965182.png)
 2. test_view_book![1725188226556](image/README/1725188226556.png)
 3. test_borrow_book![1725188285875](image/README/1725188285875.png)
 4. . test_return_book![1725188335980](image/README/1725188335980.png)
@@ -81,14 +63,11 @@ python main.py
 
 ![1725188409490](image/README/1725188409490.png)
 
-
-
 ## Here are the screenshots of the user interface locally
 
 ![1725188514220](image/README/1725188514220.png)
 
 ![1725188565003](image/README/1725188565003.png)
-
 
 ![1725188583156](image/README/1725188583156.png)
 
@@ -96,6 +75,7 @@ python main.py
 
 ![1725188648778](image/README/1725188648778.png)
 
+![1725189089896](image/README/1725189089896.png)
 
 ## Tech Stack
 
