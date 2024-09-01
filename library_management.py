@@ -8,6 +8,7 @@ class LibraryManagement():
         self.cursor = self.conn.cursor()
 
     def add_book(self, isbn: int, title: str, author: str, publication_year: int) -> bool:
+        
         # for the test case test_check_for_null_values
         if isbn is None or title is None or author is None or publication_year is None:
             raise Exception('parameters_missing')        
@@ -53,25 +54,31 @@ class LibraryManagement():
 
     def borrow_book(self, isbn: int, user_id: int) -> bool:
 
-        if isbn is None or user_id is None:
+        # for the test case test_check_for_null_values
+        if isbn is None or user_id is None:            
             raise Exception('parameters_missing')        
 
+        # for the test_borrow_book_non_int_ISBN
         if not isinstance(isbn, int):
             raise Exception('type_mismatch_for_isbn')
         
+        # for the test_borrow_book_non_int_user_id
         if not isinstance(user_id, int):
             raise Exception('type_mismatch_for_user_id')        
 
+        # for the test_borrow_book_using_wrong_ISBN
         self.cursor.execute('SELECT isbn FROM book WHERE isbn = ?', (isbn,))
         self.book = self.cursor.fetchall()        
         if len(self.book) == 0:
             raise Exception('book_not_found')
         
+        # For the test_borrower_exists
         self.cursor.execute('SELECT id FROM user WHERE id = ?', (user_id,))
         self.user = self.cursor.fetchall()
         if len(self.user) == 0:
             raise Exception('borrower_does_not_exists')
         
+        # For the test_book_already_borrowed
         self.cursor.execute('''
         SELECT b.isbn
         FROM book b
@@ -79,32 +86,47 @@ class LibraryManagement():
         JOIN user u ON br.user = u.id
         WHERE u.id = ? AND b.isbn = ?
         ''',(user_id, isbn))
-
+        
         if len(self.cursor.fetchall()) > 0:
             raise Exception('book_already_borrowed')
         
+        try:                        
+            self.cursor.execute('INSERT INTO borrowed (book, user) VALUES (?, ?)', (isbn, user_id))
+        except sqlite3.IntegrityError as e:
+            print(e)
+        finally:
+            self.conn.commit()
+            self.cursor.close()
+
         return True
     
     def return_book(self, isbn: int, user_id: int) -> bool:
+        
+        # For test_check_for_null_values
         if isbn is None or user_id is None:
             raise Exception('parameters_missing')        
 
+        # For the test_return_book_string_ISBN
         if not isinstance(isbn, int):
             raise Exception('type_mismatch_for_isbn')
         
+        # For the test_return_book_string_user_id
         if not isinstance(user_id, int):
             raise Exception('type_mismatch_for_user_id')
 
+        # For the test_return_book_using_wrong_ISBN
         self.cursor.execute('SELECT isbn FROM book WHERE isbn = ?', (isbn,))        
         self.book = self.cursor.fetchall()        
         if len(self.book) == 0:
             raise Exception('book_not_found')
         
+        # For the test_returner_exists
         self.cursor.execute('SELECT id FROM user WHERE id = ?', (user_id,))
         self.user = self.cursor.fetchall()
         if len(self.user) == 0:
             raise Exception('returner_does_not_exists')
 
+        # for the test_book_is_not_borrowed
         self.cursor.execute('''
         SELECT b.isbn
         FROM book b
@@ -118,6 +140,7 @@ class LibraryManagement():
         
         return True
 
+    # For the test_view_books_returns_list
     def get_books(self) -> list:
         self.cursor.execute(f'select * from book')
         self.books = self.cursor.fetchall()        

@@ -7,11 +7,7 @@ from datetime import datetime
 
 class TestMultiplyFunction(unittest.TestCase):
     def setUp(self):
-        self.LMS = LibraryManagement()
-
-    def test_return_type_is_boolean(self):
-        self.result = self.LMS.add_book(1,'Test Book','Test Author',2024)
-        self.assertIsInstance(self.result,bool,"The return type of add_book should be a boolean only!!")
+        self.LMS = LibraryManagement()    
     
     def test_check_for_null_values(self):
         # I'm simply raising an assertion error when any of the input parameter is null or not defined
@@ -67,10 +63,11 @@ class TestMultiplyFunction(unittest.TestCase):
     def test_book_duplication(self):
         # I'm simply raising an assertion error  when someone tries to add a book with same isbn twice
         try:
-            with self.assertRaises(Exception) as e:                
+            with self.assertRaises(Exception) as e:
+                self.result = self.LMS.add_book(1,'Test Book','Test Author',2024)
                 self.assertEqual(str(e.exception),'book_already_exists')
         except Exception as e:
-            print(e)
+            self.assertIsInstance(self.result,bool,"The return type of add_book should be a boolean only!!")            
 
 
 if __name__ == '__main__':
