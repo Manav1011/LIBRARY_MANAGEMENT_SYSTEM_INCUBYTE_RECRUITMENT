@@ -10,7 +10,7 @@ class TestMultiplyFunction(unittest.TestCase):
     def test_return_book_using_wrong_ISBN(self):
         # I'm simply raising an assertion error  when ISBN is a stirng type
         with self.assertRaises(Exception) as context:
-            self.LMS.return_book('dummy-isbn')
+            self.LMS.return_book('dummy-isbn','dummy-user-id')
         self.assertEqual(str(context.exception),'book_not_found')
         
 
