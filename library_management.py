@@ -5,7 +5,7 @@ class LibraryManagement():
         self.conn = sqlite3.connect('book.db')
         self.cursor = self.conn.cursor()
 
-    def add_book(self,isbn):
+    def add_book(self,isbn,title,author,publication_year):
         pass
 
     def borrow_book(self,isbn):
