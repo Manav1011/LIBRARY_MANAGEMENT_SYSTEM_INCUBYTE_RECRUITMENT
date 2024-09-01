@@ -1,6 +1,6 @@
-python return_book_test.py 
-.
+python return_book_test.py
+.......
 ----------------------------------------------------------------------
-Ran 1 test in 0.001s
+Ran 7 tests in 0.003s
 
 OK

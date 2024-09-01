@@ -86,11 +86,38 @@ class LibraryManagement():
         
         return True
     
-    def return_book(self,isbn):
+    def return_book(self,isbn,user_id):
+        if isbn is None or user_id is None:
+            raise Exception('parameters_missing')        
+
+        if not isinstance(isbn, int):
+            raise Exception('type_mismatch_for_isbn')
+        
+        if not isinstance(user_id, int):
+            raise Exception('type_mismatch_for_user_id')
+        
         self.cursor.execute(f'select isbn from book where isbn="{isbn}"')
-        self.book = self.cursor.fetchall()
+        self.book = self.cursor.fetchall()        
         if len(self.book) == 0:
             raise Exception('book_not_found')
+        
+        self.cursor.execute(f'select id from user where id="{user_id}"')
+        self.user = self.cursor.fetchall()
+        if len(self.user) == 0:
+            raise Exception('returner_does_not_exists')
+
+        self.cursor.execute(f'''
+        SELECT b.isbn
+        FROM book b
+        JOIN borrowed br ON br.book = b.isbn
+        JOIN user u ON br.user = u.id
+        WHERE u.id = {user_id} and b.isbn= {isbn}
+        ''')
+
+        if len(self.cursor.fetchall()) == 0:
+            raise Exception('book_is_not_borrowed')
+        
+        return True
 
     def get_books(self):
         self.cursor.execute(f'select * from book')
