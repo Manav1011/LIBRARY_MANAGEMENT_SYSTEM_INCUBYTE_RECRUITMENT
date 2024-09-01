@@ -57,7 +57,7 @@ python main.py
 git clone https://github.com/Manav1011/LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT.git
 cd LIBRARY_MANAGEMENT_SYSTEM_INCUBYTE_RECRUITMENT
 
-sudo docker build -t lms .
+docker build -t lms .
 
 docker run -it lms /bin/bash  
 
