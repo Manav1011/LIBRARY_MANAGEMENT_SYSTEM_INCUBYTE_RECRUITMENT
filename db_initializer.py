@@ -9,5 +9,7 @@ cursor.execute("create table if not exists book (isbn INT PRIMARY KEY,title TEXT
 cursor.execute("create table if not exists user (id INT PRIMARY KEY,email TEXT NOT NULL)")
 cursor.execute('''create table if not exists borrowed (id INT PRIMARY KEY,book INT NOT NULL,user INT NOT NULL,FOREIGN KEY (book) REFERENCES book(isbn),FOREIGN KEY (user) REFERENCES user(id))''')
 
+cursor.execute("select * from book")
+print(cursor.fetchall())
 conn.commit()
 conn.close()

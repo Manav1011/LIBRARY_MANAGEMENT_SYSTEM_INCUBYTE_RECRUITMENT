@@ -10,7 +10,7 @@ class TestMultiplyFunction(unittest.TestCase):
         self.LMS = LibraryManagement()
 
     def test_return_type_is_boolean(self):
-        self.result = self.LMS.add_book(1,'Test Book','Test Author',2024)
+        self.result = self.LMS.add_book(2,'Test Book','Test Author',2024)
         self.assertIsInstance(self.result,bool,"The return type of add_book should be a boolean only!!")
     
     def test_check_for_null_values(self):
@@ -22,7 +22,7 @@ class TestMultiplyFunction(unittest.TestCase):
         self.assertRaises(Exception, self.LMS.add_book,None,None,None,None)
         self.assertRaises(Exception, self.LMS.add_book)
 
-    def test_add_book_string_ISBN(self):
+    def test_add_book_non_int_ISBN(self):
         # I'm simply raising an assertion error  when ISBN is a stirng type
         with self.assertRaises(Exception) as e:
             self.LMS.add_book("1",'Test Book','Test Author',2024)
@@ -40,7 +40,7 @@ class TestMultiplyFunction(unittest.TestCase):
             self.LMS.add_book(1,'Test Book',dict,2024)
         self.assertEqual(str(e.exception),'type_mismatch_for_author')
 
-    def test_add_book_int_publication_year(self):
+    def test_add_book_non_int_publication_year(self):
         # I'm simply raising an assertion error  when publication_year is a int type
         with self.assertRaises(Exception) as e:
             self.LMS.add_book(1,'Test Book','Test Author',"2024")
@@ -63,6 +63,13 @@ class TestMultiplyFunction(unittest.TestCase):
         with self.assertRaises(Exception) as e:
             self.LMS.add_book(1,'Test $ Book','Test Author',2024)
         self.assertEqual(str(e.exception),'special_characters_are_not_allowed')
+
+    def test_book_duplication(self):
+        # I'm simply raising an assertion error  when someone tries to add a book with same isbn twice
+        with self.assertRaises(Exception) as e:
+            self.LMS.add_book(1,'Test Book','Test Author',2024)
+        self.assertEqual(str(e.exception),'book_already_exists')
+
 
 
 

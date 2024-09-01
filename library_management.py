@@ -41,14 +41,39 @@ class LibraryManagement():
         # For the test_special_characters_in_title
         if re.search(r'[^a-zA-Z0-9\s]', title):
             raise Exception('special_characters_are_not_allowed')
+        
+        try:
+            self.cursor.execute(f'insert into book VALUES({isbn},"{title}","{author}",{publication_year})')
+        except sqlite3.IntegrityError as e:            
+            raise Exception('book_already_exists')
+        finally:
+            self.conn.commit()
+            self.cursor.close()
     
         return True
 
-    def borrow_book(self,isbn):
+    def borrow_book(self,isbn,user_id):
+
+        if isbn is None or user_id is None:
+            raise Exception('parameters_missing')        
+
+        if not isinstance(isbn, int):
+            raise Exception('type_mismatch_for_isbn')
+        
+        if not isinstance(user_id, int):
+            raise Exception('type_mismatch_for_user_id')        
+
         self.cursor.execute(f'select isbn from book where isbn="{isbn}"')
-        self.book = self.cursor.fetchall()
+        self.book = self.cursor.fetchall()        
         if len(self.book) == 0:
             raise Exception('book_not_found')
+        
+        self.cursor.execute(f'select id from user where id="{user_id}"')
+        self.user = self.cursor.fetchall()
+        if len(self.user) == 0:
+            raise Exception('borrower_does_not_exists')
+        
+        return True
     
     def return_book(self,isbn):
         self.cursor.execute(f'select isbn from book where isbn="{isbn}"')
