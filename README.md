@@ -46,6 +46,7 @@ python -m tests.test_return_book
 
 #To run all the tests at once
 python -m unittest discover -s tests
+#Active User Email : manavshah1011.ms@gmail.com
 
 # TO run the user interface
 python main.py
@@ -76,6 +77,7 @@ python -m unittest discover -s tests
 
 # TO run the user interface
 python main.py 
+#Active User Email : manavshah1011.ms@gmail.com
 ```
 
 ## Here are the screenshots of the running the test cases locally
