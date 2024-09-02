@@ -40,9 +40,9 @@ python db_initializer.py
 
 # to run the tests individually
 python -m tests.test_add_book
-python -m tests.test_view_book.py
-python -m tests.test_borrow_book.py
-python -m tests.test_return_book.py
+python -m tests.test_view_book
+python -m tests.test_borrow_book
+python -m tests.test_return_book
 
 #To run all the tests at once
 python -m unittest discover -s tests
@@ -67,9 +67,9 @@ python db_initializer.py
 # to run the tests individually
 
 python -m tests.test_add_book
-python -m tests.test_view_book.py
-python -m tests.test_borrow_book.py
-python -m tests.test_return_book.py
+python -m tests.test_view_book
+python -m tests.test_borrow_book
+python -m tests.test_return_book
 
 #To run all the tests at once
 python -m unittest discover -s tests
